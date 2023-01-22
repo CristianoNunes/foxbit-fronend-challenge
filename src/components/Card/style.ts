@@ -20,7 +20,7 @@ export const Icon = styled.img`
 `;
 
 export const PriceVariationChip = styled.div<{
-  $polarity: boolean;
+  polarity: number;
 }>`
   display: flex;
   align-items: center;
@@ -28,11 +28,14 @@ export const PriceVariationChip = styled.div<{
   padding: 0.25rem 0.25rem 0.25rem 0.5rem;
   min-width: 48px;
   height: 24px;
-  background: ${({ $polarity, theme }) =>
-    $polarity ? theme.colors.bg.positive[50] : theme.colors.bg.negative[50]};
+  background: ${({ polarity, theme }) => {
+    if (polarity === 1) return '#edeff5';
+    if (polarity === 2) return theme.colors.bg.negative[50];
+    if (polarity === 3) return theme.colors.bg.positive[50];
+  }};
   border-radius: 12px;
 `;
-
+// #edeff5
 export const PriceVariation = styled.div`
   font-family: "gilroysemi_bold";
   font-size: ${({ theme }) => theme.typography.size.xxs};

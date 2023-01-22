@@ -59,7 +59,6 @@ export default function Home() {
 
       // RESPONSE WITH ALL CRYPTOS
       if (channel === 'GetInstruments') {
-        console.log(data);
         onGetInstruments(data);
       }
 
@@ -67,6 +66,13 @@ export default function Home() {
         setCoins((prevState) => {
           return prevState.map((coin) => {
             if (data.InstrumentId !== coin.InstrumentId) return coin;
+            if (
+              data.LastTradedPx === coin.LastTradedPx &&
+              data.Rolling24HrVolume === coin.Rolling24HrVolume &&
+              data.Rolling24HrPxChange === coin.Rolling24HrPxChange
+            ) {
+              return coin;
+            }
             return {
               ...coin,
               LastTradedPx: data.LastTradedPx,
