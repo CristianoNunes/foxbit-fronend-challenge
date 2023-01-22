@@ -4,9 +4,9 @@ import Card from '../components/Card';
 import ListCard from '../components/ListCards';
 import Title from '../components/Title';
 
-interface CoinType {
-  OMSId?: number;
+export interface CoinType {
   InstrumentId?: number;
+  Product1Symbol?: string;
   LastTradedPx?: number;
   Rolling24HrVolume?: number;
   Rolling24HrPxChange?: number;

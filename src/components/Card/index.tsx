@@ -11,14 +11,7 @@ import down from '../../assets/down-arrow.svg';
 import * as S from './style';
 import Image from 'next/image';
 import { memo } from 'react';
-
-interface CoinType {
-  InstrumentId?: number;
-  Product1Symbol?: string;
-  LastTradedPx?: number;
-  Rolling24HrVolume?: number;
-  Rolling24HrPxChange?: number;
-}
+import { CoinType } from '../../pages';
 
 interface CardProps {
   coin: CoinType;
@@ -47,39 +40,39 @@ export default memo(function Card({ coin }: CardProps): JSX.Element {
       <S.Header>
         <S.Icon src={handleImgFallback()} />
         <S.PriceVariationChip
-          polarity={verifyPolarity(coin.Rolling24HrPxChange)}
+          polarity={verifyPolarity(coin?.Rolling24HrPxChange)}
         >
           <S.PriceVariation>
-            {polarityMap[verifyPolarity(coin.Rolling24HrPxChange)] && (
+            {polarityMap[verifyPolarity(coin?.Rolling24HrPxChange)] && (
               <Image
-                src={polarityMap[verifyPolarity(coin.Rolling24HrPxChange)]}
+                src={polarityMap[verifyPolarity(coin?.Rolling24HrPxChange)]}
                 alt="seta direcional"
                 width={10}
                 height={10}
               />
             )}
-            {coin.Rolling24HrPxChange
-              ? changePointToComma(coin.Rolling24HrPxChange)
+            {coin?.Rolling24HrPxChange
+              ? changePointToComma(coin?.Rolling24HrPxChange)
               : '--'}
             %
           </S.PriceVariation>
         </S.PriceVariationChip>
       </S.Header>
-      <S.Name>{coin.Product1Symbol}</S.Name>
+      <S.Name>{coin?.Product1Symbol}</S.Name>
       <S.WrapperPrice>
         <S.Coin>R$</S.Coin>
         <S.Price>
-          {coin.LastTradedPx
-            ? formatValueFourDecimals(coin.LastTradedPx)
+          {coin?.LastTradedPx
+            ? formatValueFourDecimals(coin?.LastTradedPx)
             : '--'}
         </S.Price>
       </S.WrapperPrice>
       <S.WrapperVolume>
         <S.SpanVolume>Volume (24h):</S.SpanVolume>
         <S.Volume>
-          {coin.Rolling24HrVolume
-            ? `${formatValueTwoDecimals(coin.Rolling24HrVolume)} ${
-                coin.Product1Symbol
+          {coin?.Rolling24HrVolume
+            ? `${formatValueTwoDecimals(coin?.Rolling24HrVolume)} ${
+                coin?.Product1Symbol
               }`
             : '-- --'}
         </S.Volume>
