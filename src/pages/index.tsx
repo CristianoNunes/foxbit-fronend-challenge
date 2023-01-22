@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import Card from '../components/Card';
 import ListCard from '../components/ListCards';
@@ -86,13 +87,20 @@ export default function Home() {
   }, []);
 
   return (
-    <main>
-      <Title>Foxbit - Frontend Challenge</Title>
-      <ListCard>
-        {coins.map((coin: CoinType) => {
-          return <Card key={coin.InstrumentId} coin={coin} />;
-        })}
-      </ListCard>
-    </main>
+    <div>
+      <Head>
+        <title>Foxbit - Frontend Challenge</title>
+        <meta name="description" content="Foxbit frontend challenge" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <main>
+        <Title>Foxbit - Frontend Challenge</Title>
+        <ListCard>
+          {coins.map((coin: CoinType) => {
+            return <Card key={coin.InstrumentId} coin={coin} />;
+          })}
+        </ListCard>
+      </main>
+    </div>
   );
 }
