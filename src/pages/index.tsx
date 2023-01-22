@@ -18,7 +18,7 @@ export default function Home() {
   useEffect(() => {
     const ws = new WebSocket('wss://api.foxbit.com.br/');
 
-    ws.addEventListener('open', function open() {
+    ws.onopen = () => {
       console.log('connected');
 
       // GET INSTRUMENTS
@@ -30,13 +30,13 @@ export default function Home() {
       };
 
       ws.send(JSON.stringify(payloadInstruments));
-    });
+    };
 
-    ws.addEventListener('close', function close() {
+    ws.onclose = () => {
       console.log('disconnected');
-    });
+    };
 
-    ws.addEventListener('message', function message(response) {
+    ws.onmessage = (response) => {
       const { n, o } = JSON.parse(response.data);
       const channel = n; // GetInstruments | SubscribeLevel1 | Level1UpdateEvent
       if (o === undefined) {
@@ -83,7 +83,7 @@ export default function Home() {
           });
         });
       }
-    });
+    };
   }, []);
 
   return (
