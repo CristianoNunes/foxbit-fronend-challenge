@@ -62,7 +62,7 @@ export default function Home() {
       if (channel === 'GetInstruments') {
         onGetInstruments(data);
       }
-
+      // FIRST RESPONSE AND UPDATES TO SUBSCRIBELEVEL1
       if (['SubscribeLevel1', 'Level1UpdateEvent'].includes(channel)) {
         setCoins((prevState) => {
           return prevState.map((coin) => {

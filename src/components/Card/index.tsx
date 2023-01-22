@@ -58,19 +58,30 @@ export default memo(function Card({ coin }: CardProps): JSX.Element {
                 height={10}
               />
             )}
-            {changePointToComma(coin.Rolling24HrPxChange)}%
+            {coin.Rolling24HrPxChange
+              ? changePointToComma(coin.Rolling24HrPxChange)
+              : '--'}
+            %
           </S.PriceVariation>
         </S.PriceVariationChip>
       </S.Header>
       <S.Name>{coin.Product1Symbol}</S.Name>
       <S.WrapperPrice>
         <S.Coin>R$</S.Coin>
-        <S.Price>{formatValueFourDecimals(coin.LastTradedPx)}</S.Price>
+        <S.Price>
+          {coin.LastTradedPx
+            ? formatValueFourDecimals(coin.LastTradedPx)
+            : '--'}
+        </S.Price>
       </S.WrapperPrice>
       <S.WrapperVolume>
         <S.SpanVolume>Volume (24h):</S.SpanVolume>
         <S.Volume>
-          {formatValueTwoDecimals(coin.Rolling24HrVolume)} {coin.Product1Symbol}
+          {coin.Rolling24HrVolume
+            ? `${formatValueTwoDecimals(coin.Rolling24HrVolume)} ${
+                coin.Product1Symbol
+              }`
+            : '-- --'}
         </S.Volume>
       </S.WrapperVolume>
     </S.Wrapper>
