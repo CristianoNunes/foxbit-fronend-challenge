@@ -15,7 +15,7 @@ export default function MainLayout() {
   const [coins, setCoins] = useState<CoinType[]>([]);
 
   useEffect(() => {
-    const ws = new WebSocket('wss://api.foxbit.com.br/');
+    const ws = new WebSocket(process.env.NEXT_PUBLIC_WEB_SOCKET_URL);
 
     ws.onopen = () => {
       console.log('connected');
@@ -90,7 +90,13 @@ export default function MainLayout() {
       <S.Title>Foxbit - Frontend Challenge</S.Title>
       <S.Content>
         {coins.map((coin: CoinType) => {
-          return <Card key={coin.InstrumentId} coin={coin} />;
+          return (
+            <Card
+              key={coin.InstrumentId}
+              coin={coin}
+              datatest-id={`card_test_id_${coin.InstrumentId}`}
+            />
+          );
         })}
       </S.Content>
     </S.Wrapper>
