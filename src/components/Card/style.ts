@@ -1,4 +1,7 @@
 import styled from 'styled-components';
+interface PriceVariationChipProps {
+  polarity: number;
+}
 
 export const Wrapper = styled.div`
   display: flex;
@@ -19,9 +22,18 @@ export const Icon = styled.img`
   width: 28px;
 `;
 
-export const PriceVariationChip = styled.div<{
-  polarity: number;
-}>`
+export const Name = styled.span.attrs({
+  'data-testid': 'name_coin_test_id',
+})`
+  font-family: "gilroymedium";
+  font-weight: 500;
+  font-size: ${({ theme }) => theme.typography.size.sm};
+  margin-top: 4px;
+`;
+
+export const PriceVariationChip = styled.div.attrs({
+  'data-testid': 'price_variation_chip_test_id',
+})<PriceVariationChipProps>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,18 +47,13 @@ export const PriceVariationChip = styled.div<{
   }};
   border-radius: 12px;
 `;
-// #edeff5
-export const PriceVariation = styled.div`
+
+export const PriceVariation = styled.div.attrs({
+  'data-testid': 'price_variation_test_id',
+})`
   font-family: "gilroysemi_bold";
   font-size: ${({ theme }) => theme.typography.size.xxs};
   color: ${({ theme }) => theme.colors.content.positive[800]};
-`;
-
-export const Name = styled.span`
-  font-family: "gilroymedium";
-  font-weight: 500;
-  font-size: ${({ theme }) => theme.typography.size.sm};
-  margin-top: 4px;
 `;
 
 export const WrapperPrice = styled.div`
@@ -60,7 +67,9 @@ export const Coin = styled.span`
   margin-right: 0.25rem;
 `;
 
-export const Price = styled.span`
+export const Price = styled.span.attrs({
+  'data-testid': 'price_test_id',
+})`
   font-size: ${({ theme }) => theme.typography.size.md};
 `;
 
@@ -72,7 +81,6 @@ export const WrapperVolume = styled.div`
 `;
 
 export const SpanVolume = styled.span`
-  /* font-size: ${({ theme }) => theme.typography.size.xxxs}; */
   color: rgb(111, 112, 117);
     font-family: gilroymedium;
     font-weight: 500;
@@ -80,7 +88,9 @@ export const SpanVolume = styled.span`
     line-height: 1;
 `;
 
-export const Volume = styled.span`
+export const Volume = styled.span.attrs({
+  'data-testid': 'volume_test_id',
+})`
   font-size: ${({ theme }) => theme.typography.size.xxs};
   font-family: gilroymedium;
   font-weight: 500;

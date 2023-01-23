@@ -32,6 +32,7 @@ export const formatValueFourDecimals = (value: number) => {
   }
   return newIntegerPart + ',' + decimalPart;
 };
+
 export const formatValueTwoDecimals = (value: number) => {
   if (!value) return;
   return value.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');

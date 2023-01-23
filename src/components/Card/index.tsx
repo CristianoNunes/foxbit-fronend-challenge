@@ -5,13 +5,12 @@ import {
   verifyPolarity,
 } from '../../utils';
 
-import up from '../../assets/up-arrow.svg';
-import down from '../../assets/down-arrow.svg';
-
 import * as S from './style';
-import Image from 'next/image';
 import { memo } from 'react';
-import { CoinType } from '../../pages';
+
+import { ArrowDown } from '../Icons/ArrowDown';
+import { ArrowUp } from '../Icons/ArrowUp';
+import { CoinType } from '../../templates/MainLayout';
 
 interface CardProps {
   coin: CoinType;
@@ -20,8 +19,8 @@ interface CardProps {
 export default memo(function Card({ coin }: CardProps): JSX.Element {
   const polarityMap = {
     1: null,
-    2: down,
-    3: up,
+    2: <ArrowDown />,
+    3: <ArrowUp />,
   };
 
   const handleImgFallback = () => {
@@ -43,14 +42,8 @@ export default memo(function Card({ coin }: CardProps): JSX.Element {
           polarity={verifyPolarity(coin?.Rolling24HrPxChange)}
         >
           <S.PriceVariation>
-            {polarityMap[verifyPolarity(coin?.Rolling24HrPxChange)] && (
-              <Image
-                src={polarityMap[verifyPolarity(coin?.Rolling24HrPxChange)]}
-                alt="seta direcional"
-                width={10}
-                height={10}
-              />
-            )}
+            {polarityMap[verifyPolarity(coin?.Rolling24HrPxChange)] &&
+              polarityMap[verifyPolarity(coin?.Rolling24HrPxChange)]}
             {coin?.Rolling24HrPxChange
               ? changePointToComma(coin?.Rolling24HrPxChange)
               : '--'}
@@ -58,7 +51,9 @@ export default memo(function Card({ coin }: CardProps): JSX.Element {
           </S.PriceVariation>
         </S.PriceVariationChip>
       </S.Header>
-      <S.Name>{coin?.Product1Symbol}</S.Name>
+      <S.Name>
+        {coin?.Product1Symbol ? coin?.Product1Symbol : 'Loading...'}
+      </S.Name>
       <S.WrapperPrice>
         <S.Coin>R$</S.Coin>
         <S.Price>
